@@ -6,7 +6,6 @@ import { EmptyScreen } from "@/components/empty-screen"
 import { Message } from "@/lib/chat/actions"
 import { useLocalStorage } from "@/lib/hooks/use-local-storage"
 import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor"
-import { Auth } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import { User } from "@clerk/nextjs/dist/types/server"
 import { useAIState, useUIState } from "ai/rsc"
@@ -18,11 +17,10 @@ export interface ChatProps extends React.ComponentProps<"div"> {
   id?: string
   initialMessages?: Message[]
   missingKeys: string[]
-  session?: Auth
-  user?: User
+  user?: User | null
 }
 
-export function Chat({ id, className, missingKeys, session }: ChatProps) {
+export function Chat({ id, className, missingKeys, user }: ChatProps) {
   const router = useRouter()
   const path = usePathname()
   const [input, setInput] = useState("")
@@ -32,12 +30,12 @@ export function Chat({ id, className, missingKeys, session }: ChatProps) {
   const [_, setNewChatId] = useLocalStorage("newChatId", id)
 
   useEffect(() => {
-    if (session) {
+    if (user) {
       if (!path.includes("chat") && messages.length === 1) {
         window.history.replaceState({}, "", `/chat/${id}`)
       }
     }
-  }, [id, path, session, messages])
+  }, [id, path, user?.id, messages])
 
   useEffect(() => {
     const messagesLength = aiState.messages?.length
@@ -66,7 +64,7 @@ export function Chat({ id, className, missingKeys, session }: ChatProps) {
     >
       <div className={cn("pb-[200px] pt-4", className)} ref={messagesRef}>
         {messages.length ? (
-          <ChatList messages={messages} isShared={false} session={session} />
+          <ChatList messages={messages} isShared={false} user={user} />
         ) : (
           <EmptyScreen />
         )}

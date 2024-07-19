@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server"
+import type { auth } from "@clerk/nextjs/server"
 import { Message } from "ai"
 
 export interface Chat extends Record<string, any> {
