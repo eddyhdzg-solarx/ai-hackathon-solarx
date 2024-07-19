@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
-'use client'
+"use client"
 
-import { useActions, useUIState } from 'ai/rsc'
+import { useActions, useUIState } from "ai/rsc"
 
 interface Hotel {
   id: number
@@ -19,20 +17,20 @@ export const ListHotels = ({
   hotels = [
     {
       id: 1,
-      name: 'The St. Regis Rome',
-      description: 'Renowned luxury hotel with a lavish spa',
+      name: "The St. Regis Rome",
+      description: "Renowned luxury hotel with a lavish spa",
       price: 450
     },
     {
       id: 2,
-      name: 'The Inn at the Roman Forum',
-      description: 'Upscale hotel with Roman ruins and a bar',
+      name: "The Inn at the Roman Forum",
+      description: "Upscale hotel with Roman ruins and a bar",
       price: 145
     },
     {
       id: 3,
-      name: 'Hotel Roma',
-      description: 'Vibrant property with free breakfast',
+      name: "Hotel Roma",
+      description: "Vibrant property with free breakfast",
       price: 112
     }
   ]
@@ -46,11 +44,11 @@ export const ListHotels = ({
         We recommend a 3 night stay in Rome. Here are some hotels you can choose
         from.
       </p>
-      <div className="grid gap-4 p-2 sm:p-4 border border-neutral-200 rounded-2xl bg-white">
+      <div className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-2 sm:p-4">
         {hotels.map(hotel => (
           <div
             key={hotel.id}
-            className="p-2 flex justify-between hover:bg-neutral-50 rounded-xl cursor-pointer gap-4"
+            className="flex cursor-pointer justify-between gap-4 rounded-xl p-2 hover:bg-neutral-50"
             onClick={async () => {
               const response = await submitUserMessage(
                 `I want to book the ${hotel.name}, proceed to checkout by calling checkoutBooking function.`
@@ -61,10 +59,10 @@ export const ListHotels = ({
               ])
             }}
           >
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="w-20 bg-neutral-100 aspect-video rounded-lg overflow-hidden">
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <div className="aspect-video w-20 overflow-hidden rounded-lg bg-neutral-100">
                 <img
-                  className="object-cover aspect-video h-full rounded-lg"
+                  className="aspect-video h-full rounded-lg object-cover"
                   src={`/images/${hotel.id}.jpg`}
                 />
               </div>
@@ -76,10 +74,10 @@ export const ListHotels = ({
               </div>
             </div>
             <div className="shrink-0">
-              <div className="text-lg font-medium text-right">
+              <div className="text-right text-lg font-medium">
                 ${hotel.price}
               </div>
-              <div className="text-neutral-600 text-xs text-right">
+              <div className="text-right text-xs text-neutral-600">
                 per night
               </div>
             </div>

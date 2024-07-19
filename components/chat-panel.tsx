@@ -1,6 +1,5 @@
 import * as React from "react"
 
-import { shareChat } from "@/app/actions"
 import { ButtonScrollToBottom } from "@/components/button-scroll-to-bottom"
 import { ChatShareDialog } from "@/components/chat-share-dialog"
 import { FooterText } from "@/components/footer"
@@ -13,6 +12,7 @@ import { useAIState, useActions, useUIState } from "ai/rsc"
 import { nanoid } from "nanoid"
 import { toast } from "sonner"
 import { UserMessage } from "./stocks/message"
+import { shareChat } from "@/app/actions"
 
 export interface ChatPanelProps {
   id?: string

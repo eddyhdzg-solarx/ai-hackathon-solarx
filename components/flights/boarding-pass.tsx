@@ -1,6 +1,5 @@
 "use client"
 
-/* eslint-disable @next/next/no-img-element */
 import Barcode from "react-jsbarcode"
 
 interface BoardingPassProps {

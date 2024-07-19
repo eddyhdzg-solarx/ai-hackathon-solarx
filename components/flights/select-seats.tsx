@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import { useAIState, useActions, useUIState } from "ai/rsc"
