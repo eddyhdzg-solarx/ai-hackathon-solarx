@@ -1,22 +1,21 @@
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import { Analytics } from '@vercel/analytics/react'
 import '@/app/globals.css'
-import { cn } from '@/lib/utils'
-import { TailwindIndicator } from '@/components/tailwind-indicator'
-import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
+import { Providers } from '@/components/providers'
 import { Toaster } from '@/components/ui/sonner'
 import { KasadaClient } from '@/lib/kasada/kasada-client'
+import { cn } from '@/lib/utils'
+import { Analytics } from '@vercel/analytics/react'
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
 
 export const metadata = {
-  metadataBase: new URL('https://gemini.vercel.ai'),
+  metadataBase: new URL('https://ai.solarx.app'),
   title: {
-    default: 'Next.js Gemini Chatbot',
-    template: `%s - Next.js Gemini Chatbot`
+    default: 'SolarX AI Chatbot Demo',
+    template: `%s - SolarX AI Chatbot Demo`
   },
   description:
-    'Build your own generative UI chatbot using the Vercel AI SDK and Google Gemini',
+    'AI chatbot demo app for analyzing sun radiation, transmission lines, electricity prices, and land use.',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
@@ -53,11 +52,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen">
+          <div className="flex min-h-screen flex-col">
             <Header />
-            <main className="flex flex-col flex-1">{children}</main>
+            <main className="flex flex-1 flex-col">{children}</main>
           </div>
-          <TailwindIndicator />
         </Providers>
         <Analytics />
       </body>

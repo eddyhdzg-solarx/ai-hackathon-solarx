@@ -1,21 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-import * as React from 'react'
 import Link from 'next/link'
+import * as React from 'react'
 
-import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
-import { Button, buttonVariants } from '@/components/ui/button'
-import {
-  IconGitHub,
-  IconNextChat,
-  IconSeparator,
-  IconVercel
-} from '@/components/ui/icons'
+import { Button } from '@/components/ui/button'
+import { IconGitHub, IconSeparator } from '@/components/ui/icons'
 import { UserMenu } from '@/components/user-menu'
+import { Session } from '@/lib/types'
+import { ChatHistory } from './chat-history'
 import { SidebarMobile } from './sidebar-mobile'
 import { SidebarToggle } from './sidebar-toggle'
-import { ChatHistory } from './chat-history'
-import { Session } from '@/lib/types'
 
 async function UserOrLogin() {
   const session = (await auth()) as Session
@@ -30,15 +23,19 @@ async function UserOrLogin() {
         </>
       ) : (
         <Link href="/new" rel="nofollow">
-          <img className="size-6" src="/images/gemini.png" alt="gemini logo" />
+          <img
+            className="size-6"
+            src="/images/solarx-symbol-logo.svg"
+            alt="solarx logo"
+          />
         </Link>
       )}
       <div className="flex items-center">
-        <IconSeparator className="size-6 text-zinc-200" />
+        <IconSeparator className="text-neutral-200 size-6" />
         {session?.user ? (
           <UserMenu user={session.user} />
         ) : (
-          <Button variant="link" asChild className="-ml-2">
+          <Button variant="link" asChild className="-ml-2 text-neutral-950">
             <Link href="/login">Login</Link>
           </Button>
         )}
@@ -59,21 +56,11 @@ export function Header() {
         <Button asChild size="sm" variant="ghost">
           <a
             target="_blank"
-            href="https://github.com/vercel-labs/gemini-chatbot"
+            href="https://github.com/eddyhdzg-solarx/ai-hackathon-solarx"
             rel="noopener noreferrer"
           >
             <IconGitHub />
             <span className="hidden ml-2 md:flex">GitHub</span>
-          </a>
-        </Button>
-        <Button asChild size="sm" className="rounded-lg gap-1">
-          <a
-            href="https://vercel.com/templates/next.js/gemini-ai-chatbot"
-            target="_blank"
-          >
-            <IconVercel className="size-3" />
-            <span className="hidden sm:block">Deploy to Vercel</span>
-            <span className="sm:hidden">Deploy</span>
           </a>
         </Button>
       </div>

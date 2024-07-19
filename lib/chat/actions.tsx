@@ -7,32 +7,32 @@ import 'server-only'
 import {
   createAI,
   createStreamableUI,
-  getMutableAIState,
+  createStreamableValue,
   getAIState,
-  createStreamableValue
+  getMutableAIState
 } from 'ai/rsc'
 
 import { BotCard, BotMessage } from '@/components/stocks'
 
-import { nanoid, sleep } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
-import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
-import { Chat } from '../types'
 import { auth } from '@/auth'
-import { FlightStatus } from '@/components/flights/flight-status'
-import { SelectSeats } from '@/components/flights/select-seats'
-import { ListFlights } from '@/components/flights/list-flights'
 import { BoardingPass } from '@/components/flights/boarding-pass'
+import { Destinations } from '@/components/flights/destinations'
+import { FlightStatus } from '@/components/flights/flight-status'
+import { ListFlights } from '@/components/flights/list-flights'
 import { PurchaseTickets } from '@/components/flights/purchase-ticket'
+import { SelectSeats } from '@/components/flights/select-seats'
+import { ListHotels } from '@/components/hotels/list-hotels'
+import { Video } from '@/components/media/video'
+import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { CheckIcon, SpinnerIcon } from '@/components/ui/icons'
-import { format } from 'date-fns'
-import { streamText } from 'ai'
+import { nanoid, sleep } from '@/lib/utils'
 import { google } from '@ai-sdk/google'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { streamText } from 'ai'
+import { format } from 'date-fns'
 import { z } from 'zod'
-import { ListHotels } from '@/components/hotels/list-hotels'
-import { Destinations } from '@/components/flights/destinations'
-import { Video } from '@/components/media/video'
+import { Chat } from '../types'
 import { rateLimit } from './ratelimit'
 
 const genAI = new GoogleGenerativeAI(
@@ -526,11 +526,11 @@ export async function validateCode() {
 
   const status = createStreamableValue('in_progress')
   const ui = createStreamableUI(
-    <div className="flex flex-col items-center justify-center gap-3 p-6 text-zinc-500">
+    <div className="flex flex-col items-center justify-center gap-3 p-6 text-neutral-500">
       <div className="animate-spin">
         <SpinnerIcon />
       </div>
-      <div className="text-sm text-zinc-500">
+      <div className="text-sm text-neutral-500">
         Please wait while we fulfill your order.
       </div>
     </div>
@@ -543,7 +543,7 @@ export async function validateCode() {
       <div className="flex flex-col items-center text-center justify-center gap-3 p-4 text-emerald-700">
         <CheckIcon />
         <div>Payment Succeeded</div>
-        <div className="text-sm text-zinc-600">
+        <div className="text-sm text-neutral-600">
           Thanks for your purchase! You will receive an email confirmation
           shortly.
         </div>

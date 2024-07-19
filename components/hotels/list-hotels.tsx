@@ -46,11 +46,11 @@ export const ListHotels = ({
         We recommend a 3 night stay in Rome. Here are some hotels you can choose
         from.
       </p>
-      <div className="grid gap-4 p-2 sm:p-4 border border-zinc-200 rounded-2xl bg-white">
+      <div className="grid gap-4 p-2 sm:p-4 border border-neutral-200 rounded-2xl bg-white">
         {hotels.map(hotel => (
           <div
             key={hotel.id}
-            className="p-2 flex justify-between hover:bg-zinc-50 rounded-xl cursor-pointer gap-4"
+            className="p-2 flex justify-between hover:bg-neutral-50 rounded-xl cursor-pointer gap-4"
             onClick={async () => {
               const response = await submitUserMessage(
                 `I want to book the ${hotel.name}, proceed to checkout by calling checkoutBooking function.`
@@ -62,7 +62,7 @@ export const ListHotels = ({
             }}
           >
             <div className="flex flex-col sm:flex-row gap-4">
-              <div className="w-20 bg-zinc-100 aspect-video rounded-lg overflow-hidden">
+              <div className="w-20 bg-neutral-100 aspect-video rounded-lg overflow-hidden">
                 <img
                   className="object-cover aspect-video h-full rounded-lg"
                   src={`/images/${hotel.id}.jpg`}
@@ -70,14 +70,18 @@ export const ListHotels = ({
               </div>
               <div>
                 <div className="font-medium">{hotel.name}</div>
-                <div className="text-sm text-zinc-600">{hotel.description}</div>
+                <div className="text-sm text-neutral-600">
+                  {hotel.description}
+                </div>
               </div>
             </div>
             <div className="shrink-0">
               <div className="text-lg font-medium text-right">
                 ${hotel.price}
               </div>
-              <div className="text-zinc-600 text-xs text-right">per night</div>
+              <div className="text-neutral-600 text-xs text-right">
+                per night
+              </div>
             </div>
           </div>
         ))}

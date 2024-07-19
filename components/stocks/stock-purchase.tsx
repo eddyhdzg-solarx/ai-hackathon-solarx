@@ -1,8 +1,8 @@
 'use client'
 
-import { useId, useState } from 'react'
-import { useActions, useAIState, useUIState } from 'ai/rsc'
 import { formatNumber } from '@/lib/utils'
+import { useAIState, useActions, useUIState } from 'ai/rsc'
+import { useId, useState } from 'react'
 
 import type { AI } from '@/lib/chat/actions'
 
@@ -60,14 +60,14 @@ export function Purchase({
   }
 
   return (
-    <div className="rounded-xl border bg-zinc-950 p-4 text-green-400">
+    <div className="rounded-xl border bg-neutral-950 p-4 text-green-400">
       <div className="float-right inline-block rounded-full bg-white/10 px-2 py-1 text-xs">
         +1.23% ↑
       </div>
-      <div className="text-lg text-zinc-300">{symbol}</div>
+      <div className="text-lg text-neutral-300">{symbol}</div>
       <div className="text-3xl font-bold">${price}</div>
       {purchasingUI ? (
-        <div className="mt-4 text-zinc-200">{purchasingUI}</div>
+        <div className="mt-4 text-neutral-200">{purchasingUI}</div>
       ) : status === 'requires_action' ? (
         <>
           <div className="relative mt-6 pb-6">
@@ -79,18 +79,18 @@ export function Purchase({
               onChange={onSliderChange}
               min="10"
               max="1000"
-              className="h-1 w-full cursor-pointer appearance-none rounded-xl bg-zinc-600 accent-green-500 dark:bg-zinc-700"
+              className="h-1 w-full cursor-pointer appearance-none rounded-xl bg-neutral-600 accent-green-500 dark:bg-neutral-700"
             />
-            <span className="absolute bottom-1 start-0 text-xs text-zinc-400">
+            <span className="absolute bottom-1 start-0 text-xs text-neutral-400">
               10
             </span>
-            <span className="absolute bottom-1 start-1/3 -translate-x-1/2 text-xs text-zinc-400 rtl:translate-x-1/2">
+            <span className="absolute bottom-1 start-1/3 -translate-x-1/2 text-xs text-neutral-400 rtl:translate-x-1/2">
               100
             </span>
-            <span className="absolute bottom-1 start-2/3 -translate-x-1/2 text-xs text-zinc-400 rtl:translate-x-1/2">
+            <span className="absolute bottom-1 start-2/3 -translate-x-1/2 text-xs text-neutral-400 rtl:translate-x-1/2">
               500
             </span>
-            <span className="absolute bottom-1 end-0 text-xs text-zinc-400">
+            <span className="absolute bottom-1 end-0 text-xs text-neutral-400">
               1000
             </span>
           </div>
@@ -100,25 +100,25 @@ export function Purchase({
             <div className="flex flex-wrap items-center text-xl font-bold sm:items-end sm:gap-2 sm:text-3xl">
               <div className="flex basis-1/3 flex-col tabular-nums sm:basis-auto sm:flex-row sm:items-center sm:gap-2">
                 {value}
-                <span className="mb-1 text-sm font-normal text-zinc-600 sm:mb-0 dark:text-zinc-400">
+                <span className="mb-1 text-sm font-normal text-neutral-600 sm:mb-0 dark:text-neutral-400">
                   shares
                 </span>
               </div>
               <div className="basis-1/3 text-center sm:basis-auto">×</div>
               <span className="flex basis-1/3 flex-col tabular-nums sm:basis-auto sm:flex-row sm:items-center sm:gap-2">
                 ${price}
-                <span className="mb-1 ml-1 text-sm font-normal text-zinc-600 sm:mb-0 dark:text-zinc-400">
+                <span className="mb-1 ml-1 text-sm font-normal text-neutral-600 sm:mb-0 dark:text-neutral-400">
                   per share
                 </span>
               </span>
-              <div className="mt-2 basis-full border-t border-t-zinc-700 pt-2 text-center sm:mt-0 sm:basis-auto sm:border-0 sm:pt-0 sm:text-left">
+              <div className="mt-2 basis-full border-t border-t-neutral-700 pt-2 text-center sm:mt-0 sm:basis-auto sm:border-0 sm:pt-0 sm:text-left">
                 = <span>{formatNumber(value * price)}</span>
               </div>
             </div>
           </div>
 
           <button
-            className="mt-6 w-full rounded-xl bg-green-400 px-4 py-2 font-bold text-zinc-900 hover:bg-green-500"
+            className="mt-6 w-full rounded-xl bg-green-400 px-4 py-2 font-bold text-neutral-900 hover:bg-green-500"
             onClick={async () => {
               const response = await confirmPurchase(symbol, price, value)
               setPurchasingUI(response.purchasingUI)

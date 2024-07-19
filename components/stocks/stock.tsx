@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useRef, useEffect, useId } from 'react'
-import { scaleLinear } from 'd3-scale'
-import { subMonths, format } from 'date-fns'
-import { useResizeObserver } from 'usehooks-ts'
 import { useAIState } from 'ai/rsc'
+import { scaleLinear } from 'd3-scale'
+import { format, subMonths } from 'date-fns'
+import { useEffect, useId, useRef, useState } from 'react'
+import { useResizeObserver } from 'usehooks-ts'
 
 interface Stock {
   symbol: string
@@ -66,15 +66,15 @@ export function Stock({ props: { symbol, price, delta } }: { props: Stock }) {
   }, [startHighlight, endHighlight])
 
   return (
-    <div className="rounded-xl border bg-zinc-950 p-4 text-green-400">
+    <div className="rounded-xl border bg-neutral-950 p-4 text-green-400">
       <div className="float-right inline-block rounded-full bg-white/10 px-2 py-1 text-xs">
         {`${delta > 0 ? '+' : ''}${((delta / price) * 100).toFixed(2)}% ${
           delta > 0 ? '↑' : '↓'
         }`}
       </div>
-      <div className="text-lg text-zinc-300">{symbol}</div>
+      <div className="text-lg text-neutral-300">{symbol}</div>
       <div className="text-3xl font-bold">${price}</div>
-      <div className="text mt-1 text-xs text-zinc-500">
+      <div className="text mt-1 text-xs text-neutral-500">
         Closed: Feb 27, 4:59 PM EST
       </div>
 
@@ -126,14 +126,14 @@ export function Stock({ props: { symbol, price, delta } }: { props: Stock }) {
       >
         {priceAtTime.x > 0 ? (
           <div
-            className="pointer-events-none absolute z-10 flex w-fit select-none gap-2 rounded-lg bg-zinc-800 p-2"
+            className="pointer-events-none absolute z-10 flex w-fit select-none gap-2 rounded-lg bg-neutral-800 p-2"
             style={{
               left: priceAtTime.x - 124 / 2,
               top: 30
             }}
           >
             <div className="text-xs tabular-nums">${priceAtTime.value}</div>
-            <div className="text-xs tabular-nums text-zinc-400">
+            <div className="text-xs tabular-nums text-neutral-400">
               {priceAtTime.time}
             </div>
           </div>
@@ -141,7 +141,7 @@ export function Stock({ props: { symbol, price, delta } }: { props: Stock }) {
 
         {startHighlight ? (
           <div
-            className="pointer-events-none absolute h-32 w-5 select-none rounded-lg border border-zinc-500 bg-zinc-500/20"
+            className="pointer-events-none absolute h-32 w-5 select-none rounded-lg border border-neutral-500 bg-neutral-500/20"
             style={{
               left: startHighlight,
               width: endHighlight

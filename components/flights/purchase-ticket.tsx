@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  CardIcon,
-  GoogleIcon,
-  LockIcon,
-  SparklesIcon
-} from '@/components/ui/icons'
+import { CardIcon, GoogleIcon, SparklesIcon } from '@/components/ui/icons'
 import { cn } from '@/lib/utils'
 import { readStreamableValue, useActions, useUIState } from 'ai/rsc'
 import { useState } from 'react'
@@ -51,15 +46,15 @@ export const PurchaseTickets = ({
 
   return (
     <div className="grid gap-4">
-      <div className="grid gap-4 p-4 sm:p-6 border border-zinc-200 rounded-2xl bg-white">
+      <div className="grid gap-4 p-4 sm:p-6 border border-neutral-200 rounded-2xl bg-white">
         <div className="flex">
-          <div className="flex items-center gap-2 text-zinc-950">
-            <div className="size-6 flex items-center justify-center bg-zinc-100 rounded-full text-zinc-500 [&>svg]:size-3">
+          <div className="flex items-center gap-2 text-neutral-950">
+            <div className="size-6 flex items-center justify-center bg-neutral-100 rounded-full text-neutral-500 [&>svg]:size-3">
               <CardIcon />
             </div>
-            <div className="text-sm text-zinc-600">Visa · · · · 0512</div>
+            <div className="text-sm text-neutral-600">Visa · · · · 0512</div>
           </div>
-          <div className="text-sm flex ml-auto items-center gap-1 border border-zinc-200 px-3 py-0.5 rounded-full">
+          <div className="text-sm flex ml-auto items-center gap-1 border border-neutral-200 px-3 py-0.5 rounded-full">
             <GoogleIcon />
             Pay
           </div>
@@ -71,7 +66,7 @@ export const PurchaseTickets = ({
               your purchase to complete your booking.
             </p>
             <button
-              className="p-2 text-center rounded-full cursor-pointer bg-zinc-900 text-zinc-50 hover:bg-zinc-600 transition-colors"
+              className="p-2 text-center rounded-full cursor-pointer bg-neutral-900 text-neutral-50 hover:bg-neutral-600 transition-colors"
               onClick={async () => {
                 const { status, display } = await requestCode()
                 setCurrentStatus(status)
@@ -87,7 +82,7 @@ export const PurchaseTickets = ({
               Enter the code sent to your phone (***) *** 6137 to complete your
               purchase.
             </div>
-            <div className="flex justify-center p-2 text-center border rounded-full text-zinc-950">
+            <div className="flex justify-center p-2 text-center border rounded-full text-neutral-950">
               <input
                 className="w-16 text-center bg-transparent outline-none tabular-nums"
                 type="text"
@@ -97,7 +92,7 @@ export const PurchaseTickets = ({
               />
             </div>
             <button
-              className="p-2 text-center rounded-full cursor-pointer bg-zinc-900 text-zinc-50 hover:bg-zinc-600 transition-colors"
+              className="p-2 text-center rounded-full cursor-pointer bg-neutral-900 text-neutral-50 hover:bg-neutral-600 transition-colors"
               onClick={async () => {
                 const { status, display } = await validateCode()
 
@@ -130,7 +125,7 @@ export const PurchaseTickets = ({
         {suggestions.map(suggestion => (
           <button
             key={suggestion}
-            className="flex items-center gap-2 px-3 py-2 text-sm transition-colors bg-zinc-50 hover:bg-zinc-100 rounded-xl cursor-pointer"
+            className="flex items-center gap-2 px-3 py-2 text-sm transition-colors bg-neutral-50 hover:bg-neutral-100 rounded-xl cursor-pointer"
             onClick={async () => {
               const response = await submitUserMessage(suggestion)
               setMessages((currentMessages: any[]) => [

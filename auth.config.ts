@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from 'next-auth'
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authConfig = {
   secret: process.env.AUTH_SECRET,
@@ -38,5 +39,17 @@ export const authConfig = {
       return session
     }
   },
-  providers: []
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code'
+        }
+      }
+    })
+  ]
 } satisfies NextAuthConfig

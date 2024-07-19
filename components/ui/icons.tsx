@@ -641,7 +641,7 @@ export const SpinnerIcon = () => {
       strokeLinecap="round"
       strokeLinejoin="round"
       xmlns="http://www.w3.org/2000/svg"
-      className="size-5 animate-spin stroke-zinc-400"
+      className="size-5 animate-spin stroke-neutral-400"
     >
       <path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12"></path>
     </svg>
@@ -735,31 +735,31 @@ export const GooglePayIcon = () => {
 }
 
 export {
-  IconEdit,
-  IconNextChat,
-  IconGemini,
-  IconVercel,
-  IconGitHub,
-  IconSeparator,
   IconArrowDown,
-  IconArrowRight,
-  IconUser,
-  IconPlus,
   IconArrowElbow,
-  IconSpinner,
-  IconMessage,
-  IconTrash,
-  IconRefresh,
-  IconStop,
-  IconSidebar,
-  IconMoon,
-  IconSun,
-  IconCopy,
+  IconArrowRight,
   IconCheck,
-  IconDownload,
+  IconChevronUpDown,
   IconClose,
-  IconShare,
-  IconUsers,
+  IconCopy,
+  IconDownload,
+  IconEdit,
   IconExternalLink,
-  IconChevronUpDown
+  IconGemini,
+  IconGitHub,
+  IconMessage,
+  IconMoon,
+  IconNextChat,
+  IconPlus,
+  IconRefresh,
+  IconSeparator,
+  IconShare,
+  IconSidebar,
+  IconSpinner,
+  IconStop,
+  IconSun,
+  IconTrash,
+  IconUser,
+  IconUsers,
+  IconVercel
 }

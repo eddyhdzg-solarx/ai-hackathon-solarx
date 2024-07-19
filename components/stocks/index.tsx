@@ -1,12 +1,12 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { EventsSkeleton } from './events-skeleton'
 import { StockSkeleton } from './stock-skeleton'
 import { StocksSkeleton } from './stocks-skeleton'
-import { EventsSkeleton } from './events-skeleton'
 
-export { spinner } from './spinner'
 export { BotCard, BotMessage, SystemMessage } from './message'
+export { spinner } from './spinner'
 
 const Stock = dynamic(() => import('./stock').then(mod => mod.Stock), {
   ssr: false,
@@ -18,7 +18,7 @@ const Purchase = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-[375px] rounded-xl border bg-zinc-950 p-4 text-green-400 sm:h-[314px]" />
+      <div className="h-[375px] rounded-xl border bg-neutral-950 p-4 text-green-400 sm:h-[314px]" />
     )
   }
 )
@@ -33,4 +33,4 @@ const Events = dynamic(() => import('./events').then(mod => mod.Events), {
   loading: () => <EventsSkeleton />
 })
 
-export { Stock, Purchase, Stocks, Events }
+export { Events, Purchase, Stock, Stocks }

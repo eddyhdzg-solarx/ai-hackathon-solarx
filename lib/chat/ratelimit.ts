@@ -1,7 +1,7 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { kv } from '@vercel/kv'
-import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 const geminiRatelimit = new Ratelimit({
   redis: kv,

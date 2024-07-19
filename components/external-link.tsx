@@ -1,15 +1,23 @@
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
+
 export function ExternalLink({
   href,
-  children
+  children,
+  className
 }: {
   href: string
   children: React.ReactNode
+  className?: string
 }) {
   return (
-    <a
+    <Link
       href={href}
       target="_blank"
-      className="inline-flex flex-1 justify-center gap-1 leading-4 hover:underline"
+      className={cn(
+        'inline-flex flex-1 justify-center gap-1 leading-4 hover:underline',
+        className
+      )}
     >
       <span>{children}</span>
       <svg
@@ -24,6 +32,6 @@ export function ExternalLink({
           fill="currentColor"
         ></path>
       </svg>
-    </a>
+    </Link>
   )
 }
