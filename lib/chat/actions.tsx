@@ -2,7 +2,7 @@
 
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import 'server-only'
+import "server-only"
 
 import {
   createAI,
@@ -10,37 +10,37 @@ import {
   createStreamableValue,
   getAIState,
   getMutableAIState
-} from 'ai/rsc'
+} from "ai/rsc"
 
-import { BotCard, BotMessage } from '@/components/stocks'
+import { BotCard, BotMessage } from "@/components/stocks"
 
-import { saveChat } from '@/app/actions'
-import { auth } from '@/auth'
-import { BoardingPass } from '@/components/flights/boarding-pass'
-import { Destinations } from '@/components/flights/destinations'
-import { FlightStatus } from '@/components/flights/flight-status'
-import { ListFlights } from '@/components/flights/list-flights'
-import { PurchaseTickets } from '@/components/flights/purchase-ticket'
-import { SelectSeats } from '@/components/flights/select-seats'
-import { ListHotels } from '@/components/hotels/list-hotels'
-import { Video } from '@/components/media/video'
-import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
-import { CheckIcon, SpinnerIcon } from '@/components/ui/icons'
-import { nanoid, sleep } from '@/lib/utils'
-import { google } from '@ai-sdk/google'
-import { GoogleGenerativeAI } from '@google/generative-ai'
-import { streamText } from 'ai'
-import { format } from 'date-fns'
-import { z } from 'zod'
-import { Chat } from '../types'
-import { rateLimit } from './ratelimit'
+import { saveChat } from "@/app/actions"
+import { BoardingPass } from "@/components/flights/boarding-pass"
+import { Destinations } from "@/components/flights/destinations"
+import { FlightStatus } from "@/components/flights/flight-status"
+import { ListFlights } from "@/components/flights/list-flights"
+import { PurchaseTickets } from "@/components/flights/purchase-ticket"
+import { SelectSeats } from "@/components/flights/select-seats"
+import { ListHotels } from "@/components/hotels/list-hotels"
+import { Video } from "@/components/media/video"
+import { SpinnerMessage, UserMessage } from "@/components/stocks/message"
+import { CheckIcon, SpinnerIcon } from "@/components/ui/icons"
+import { nanoid, sleep } from "@/lib/utils"
+import { google } from "@ai-sdk/google"
+import { auth } from "@clerk/nextjs/server"
+import { GoogleGenerativeAI } from "@google/generative-ai"
+import { streamText } from "ai"
+import { format } from "date-fns"
+import { z } from "zod"
+import { Chat } from "../types"
+import { rateLimit } from "./ratelimit"
 
 const genAI = new GoogleGenerativeAI(
-  process.env.GOOGLE_GENERATIVE_AI_API_KEY || ''
+  process.env.GOOGLE_GENERATIVE_AI_API_KEY || ""
 )
 
 async function describeImage(imageBase64: string) {
-  'use server'
+  "use server"
 
   await rateLimit()
 
@@ -56,12 +56,12 @@ async function describeImage(imageBase64: string) {
   )
   ;(async () => {
     try {
-      let text = ''
+      let text = ""
 
       // attachment as video for demo purposes,
       // add your implementation here to support
       // video as input for prompts.
-      if (imageBase64 === '') {
+      if (imageBase64 === "") {
         await new Promise(resolve => setTimeout(resolve, 5000))
 
         text = `
@@ -79,14 +79,14 @@ async function describeImage(imageBase64: string) {
       10. Animal Farm by George Orwell
       `
       } else {
-        const imageData = imageBase64.split(',')[1]
+        const imageData = imageBase64.split(",")[1]
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-pro-vision' })
-        const prompt = 'List the books in this image.'
+        const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" })
+        const prompt = "List the books in this image."
         const image = {
           inlineData: {
             data: imageData,
-            mimeType: 'image/png'
+            mimeType: "image/png"
           }
         }
 
@@ -112,7 +112,7 @@ async function describeImage(imageBase64: string) {
       console.error(e)
 
       const error = new Error(
-        'The AI got rate limited, please try again later.'
+        "The AI got rate limited, please try again later."
       )
       uiStream.error(error)
       spinnerStream.error(error)
@@ -130,7 +130,7 @@ async function describeImage(imageBase64: string) {
 }
 
 async function submitUserMessage(content: string) {
-  'use server'
+  "use server"
 
   await rateLimit()
 
@@ -142,8 +142,8 @@ async function submitUserMessage(content: string) {
       ...aiState.get().messages,
       {
         id: nanoid(),
-        role: 'user',
-        content: `${aiState.get().interactions.join('\n\n')}\n\n${content}`
+        role: "user",
+        content: `${aiState.get().interactions.join("\n\n")}\n\n${content}`
       }
     ]
   })
@@ -154,7 +154,7 @@ async function submitUserMessage(content: string) {
   }))
   // console.log(history)
 
-  const textStream = createStreamableValue('')
+  const textStream = createStreamableValue("")
   const spinnerStream = createStreamableUI(<SpinnerMessage />)
   const messageStream = createStreamableUI(null)
   const uiStream = createStreamableUI()
@@ -162,7 +162,7 @@ async function submitUserMessage(content: string) {
   ;(async () => {
     try {
       const result = await streamText({
-        model: google('models/gemini-1.5-flash'),
+        model: google("models/gemini-1.5-flash"),
         temperature: 0,
         tools: {
           showFlights: {
@@ -171,8 +171,8 @@ async function submitUserMessage(content: string) {
             parameters: z.object({
               departingCity: z.string(),
               arrivalCity: z.string(),
-              departingAirport: z.string().describe('Departing airport code'),
-              arrivalAirport: z.string().describe('Arrival airport code'),
+              departingAirport: z.string().describe("Departing airport code"),
+              arrivalAirport: z.string().describe("Arrival airport code"),
               date: z
                 .string()
                 .describe(
@@ -181,20 +181,20 @@ async function submitUserMessage(content: string) {
             })
           },
           listDestinations: {
-            description: 'List destinations to travel cities, max 5.',
+            description: "List destinations to travel cities, max 5.",
             parameters: z.object({
               destinations: z.array(
                 z
                   .string()
                   .describe(
-                    'List of destination cities. Include rome as one of the cities.'
+                    "List of destination cities. Include rome as one of the cities."
                   )
               )
             })
           },
           showSeatPicker: {
             description:
-              'Show the UI to choose or change seat for the selected flight.',
+              "Show the UI to choose or change seat for the selected flight.",
             parameters: z.object({
               departingCity: z.string(),
               arrivalCity: z.string(),
@@ -203,12 +203,12 @@ async function submitUserMessage(content: string) {
             })
           },
           showHotels: {
-            description: 'Show the UI to choose a hotel for the trip.',
+            description: "Show the UI to choose a hotel for the trip.",
             parameters: z.object({ city: z.string() })
           },
           checkoutBooking: {
             description:
-              'Show the UI to purchase/checkout a flight and hotel booking.',
+              "Show the UI to purchase/checkout a flight and hotel booking.",
             parameters: z.object({ shouldConfirm: z.boolean() })
           },
           showBoardingPass: {
@@ -223,13 +223,13 @@ async function submitUserMessage(content: string) {
               seat: z.string(),
               date: z
                 .string()
-                .describe('Date of the flight, example format: 6 April, 1998'),
+                .describe("Date of the flight, example format: 6 April, 1998"),
               gate: z.string()
             })
           },
           showFlightStatus: {
             description:
-              'Get the current status of imaginary flight by flight number and date.',
+              "Get the current status of imaginary flight by flight number and date.",
             parameters: z.object({
               flightCode: z.string(),
               date: z.string(),
@@ -247,7 +247,7 @@ async function submitUserMessage(content: string) {
         system: `\
       You are a friendly assistant that helps the user with booking flights to destinations that are based on a list of books. You can you give travel recommendations based on the books, and will continue to help the user book a flight to their destination.
   
-      The date today is ${format(new Date(), 'd LLLL, yyyy')}. 
+      The date today is ${format(new Date(), "d LLLL, yyyy")}. 
       The user's current location is San Francisco, CA, so the departure city will be San Francisco and airport will be San Francisco International Airport (SFO). The user would like to book the flight out on May 12, 2024.
 
       List United Airlines flights only.
@@ -264,13 +264,13 @@ async function submitUserMessage(content: string) {
         messages: [...history]
       })
 
-      let textContent = ''
+      let textContent = ""
       spinnerStream.done(null)
 
       for await (const delta of result.fullStream) {
         const { type } = delta
 
-        if (type === 'text-delta') {
+        if (type === "text-delta") {
           const { textDelta } = delta
 
           textContent += textDelta
@@ -282,15 +282,15 @@ async function submitUserMessage(content: string) {
               ...aiState.get().messages,
               {
                 id: nanoid(),
-                role: 'assistant',
+                role: "assistant",
                 content: textContent
               }
             ]
           })
-        } else if (type === 'tool-call') {
+        } else if (type === "tool-call") {
           const { toolName, args } = delta
 
-          if (toolName === 'listDestinations') {
+          if (toolName === "listDestinations") {
             const { destinations } = args
 
             uiStream.update(
@@ -306,10 +306,10 @@ async function submitUserMessage(content: string) {
                 ...aiState.get().messages,
                 {
                   id: nanoid(),
-                  role: 'assistant',
-                  content: `Here's a list of holiday destinations based on the books you've read. Choose one to proceed to booking a flight. \n\n ${args.destinations.join(', ')}.`,
+                  role: "assistant",
+                  content: `Here's a list of holiday destinations based on the books you've read. Choose one to proceed to booking a flight. \n\n ${args.destinations.join(", ")}.`,
                   display: {
-                    name: 'listDestinations',
+                    name: "listDestinations",
                     props: {
                       destinations
                     }
@@ -317,7 +317,7 @@ async function submitUserMessage(content: string) {
                 }
               ]
             })
-          } else if (toolName === 'showFlights') {
+          } else if (toolName === "showFlights") {
             aiState.done({
               ...aiState.get(),
               interactions: [],
@@ -325,11 +325,11 @@ async function submitUserMessage(content: string) {
                 ...aiState.get().messages,
                 {
                   id: nanoid(),
-                  role: 'assistant',
+                  role: "assistant",
                   content:
                     "Here's a list of flights for you. Choose one and we can proceed to pick a seat.",
                   display: {
-                    name: 'showFlights',
+                    name: "showFlights",
                     props: {
                       summary: args
                     }
@@ -343,7 +343,7 @@ async function submitUserMessage(content: string) {
                 <ListFlights summary={args} />
               </BotCard>
             )
-          } else if (toolName === 'showSeatPicker') {
+          } else if (toolName === "showSeatPicker") {
             aiState.done({
               ...aiState.get(),
               interactions: [],
@@ -351,11 +351,11 @@ async function submitUserMessage(content: string) {
                 ...aiState.get().messages,
                 {
                   id: nanoid(),
-                  role: 'assistant',
+                  role: "assistant",
                   content:
                     "Here's a list of available seats for you to choose from. Select one to proceed to payment.",
                   display: {
-                    name: 'showSeatPicker',
+                    name: "showSeatPicker",
                     props: {
                       summary: args
                     }
@@ -369,7 +369,7 @@ async function submitUserMessage(content: string) {
                 <SelectSeats summary={args} />
               </BotCard>
             )
-          } else if (toolName === 'showHotels') {
+          } else if (toolName === "showHotels") {
             aiState.done({
               ...aiState.get(),
               interactions: [],
@@ -377,11 +377,11 @@ async function submitUserMessage(content: string) {
                 ...aiState.get().messages,
                 {
                   id: nanoid(),
-                  role: 'assistant',
+                  role: "assistant",
                   content:
                     "Here's a list of hotels for you to choose from. Select one to proceed to payment.",
                   display: {
-                    name: 'showHotels',
+                    name: "showHotels",
                     props: {}
                   }
                 }
@@ -393,7 +393,7 @@ async function submitUserMessage(content: string) {
                 <ListHotels />
               </BotCard>
             )
-          } else if (toolName === 'checkoutBooking') {
+          } else if (toolName === "checkoutBooking") {
             aiState.done({
               ...aiState.get(),
               interactions: []
@@ -404,7 +404,7 @@ async function submitUserMessage(content: string) {
                 <PurchaseTickets />
               </BotCard>
             )
-          } else if (toolName === 'showBoardingPass') {
+          } else if (toolName === "showBoardingPass") {
             aiState.done({
               ...aiState.get(),
               interactions: [],
@@ -412,11 +412,11 @@ async function submitUserMessage(content: string) {
                 ...aiState.get().messages,
                 {
                   id: nanoid(),
-                  role: 'assistant',
+                  role: "assistant",
                   content:
                     "Here's your boarding pass. Please have it ready for your flight.",
                   display: {
-                    name: 'showBoardingPass',
+                    name: "showBoardingPass",
                     props: {
                       summary: args
                     }
@@ -430,7 +430,7 @@ async function submitUserMessage(content: string) {
                 <BoardingPass summary={args} />
               </BotCard>
             )
-          } else if (toolName === 'showFlightStatus') {
+          } else if (toolName === "showFlightStatus") {
             aiState.update({
               ...aiState.get(),
               interactions: [],
@@ -438,14 +438,14 @@ async function submitUserMessage(content: string) {
                 ...aiState.get().messages,
                 {
                   id: nanoid(),
-                  role: 'assistant',
+                  role: "assistant",
                   content: `The flight status of ${args.flightCode} is as follows:
                 Departing: ${args.departingCity} at ${args.departingTime} from ${args.departingAirport} (${args.departingAirportCode})
                 `
                 }
               ],
               display: {
-                name: 'showFlights',
+                name: "showFlights",
                 props: {
                   summary: args
                 }
@@ -468,7 +468,7 @@ async function submitUserMessage(content: string) {
       console.error(e)
 
       const error = new Error(
-        'The AI got rate limited, please try again later.'
+        "The AI got rate limited, please try again later."
       )
       uiStream.error(error)
       textStream.error(error)
@@ -486,7 +486,7 @@ async function submitUserMessage(content: string) {
 }
 
 export async function requestCode() {
-  'use server'
+  "use server"
 
   const aiState = getMutableAIState()
 
@@ -495,7 +495,7 @@ export async function requestCode() {
     messages: [
       ...aiState.get().messages,
       {
-        role: 'assistant',
+        role: "assistant",
         content:
           "A code has been sent to user's phone. They should enter it in the user interface to continue."
       }
@@ -514,17 +514,17 @@ export async function requestCode() {
   })()
 
   return {
-    status: 'requires_code',
+    status: "requires_code",
     display: ui.value
   }
 }
 
 export async function validateCode() {
-  'use server'
+  "use server"
 
   const aiState = getMutableAIState()
 
-  const status = createStreamableValue('in_progress')
+  const status = createStreamableValue("in_progress")
   const ui = createStreamableUI(
     <div className="flex flex-col items-center justify-center gap-3 p-6 text-neutral-500">
       <div className="animate-spin">
@@ -540,7 +540,7 @@ export async function validateCode() {
     await sleep(2000)
 
     ui.done(
-      <div className="flex flex-col items-center text-center justify-center gap-3 p-4 text-emerald-700">
+      <div className="flex flex-col items-center justify-center gap-3 p-4 text-center text-emerald-700">
         <CheckIcon />
         <div>Payment Succeeded</div>
         <div className="text-sm text-neutral-600">
@@ -555,13 +555,13 @@ export async function validateCode() {
       messages: [
         ...aiState.get().messages.slice(0, -1),
         {
-          role: 'assistant',
-          content: 'The purchase has completed successfully.'
+          role: "assistant",
+          content: "The purchase has completed successfully."
         }
       ]
     })
 
-    status.done('completed')
+    status.done("completed")
   })()
 
   return {
@@ -571,7 +571,7 @@ export async function validateCode() {
 }
 
 export type Message = {
-  role: 'user' | 'assistant' | 'system' | 'function' | 'data' | 'tool'
+  role: "user" | "assistant" | "system" | "function" | "data" | "tool"
   content: string
   id?: string
   name?: string
@@ -604,11 +604,11 @@ export const AI = createAI<AIState, UIState>({
   initialUIState: [],
   initialAIState: { chatId: nanoid(), interactions: [], messages: [] },
   unstable_onGetUIState: async () => {
-    'use server'
+    "use server"
 
     const session = await auth()
 
-    if (session && session.user) {
+    if (session && session.userId) {
       const aiState = getAIState()
 
       if (aiState) {
@@ -620,15 +620,15 @@ export const AI = createAI<AIState, UIState>({
     }
   },
   unstable_onSetAIState: async ({ state }) => {
-    'use server'
+    "use server"
 
     const session = await auth()
 
-    if (session && session.user) {
+    if (session && session.userId) {
       const { chatId, messages } = state
 
       const createdAt = new Date()
-      const userId = session.user.id as string
+      const userId = session.userId
       const path = `/chat/${chatId}`
       const title = messages[0].content.substring(0, 100)
 
@@ -650,39 +650,39 @@ export const AI = createAI<AIState, UIState>({
 
 export const getUIStateFromAIState = (aiState: Chat) => {
   return aiState.messages
-    .filter(message => message.role !== 'system')
+    .filter(message => message.role !== "system")
     .map((message, index) => ({
       id: `${aiState.chatId}-${index}`,
       display:
-        message.role === 'assistant' ? (
-          message.display?.name === 'showFlights' ? (
+        message.role === "assistant" ? (
+          message.display?.name === "showFlights" ? (
             <BotCard>
               <ListFlights summary={message.display.props.summary} />
             </BotCard>
-          ) : message.display?.name === 'showSeatPicker' ? (
+          ) : message.display?.name === "showSeatPicker" ? (
             <BotCard>
               <SelectSeats summary={message.display.props.summary} />
             </BotCard>
-          ) : message.display?.name === 'showHotels' ? (
+          ) : message.display?.name === "showHotels" ? (
             <BotCard>
               <ListHotels />
             </BotCard>
-          ) : message.content === 'The purchase has completed successfully.' ? (
+          ) : message.content === "The purchase has completed successfully." ? (
             <BotCard>
               <PurchaseTickets status="expired" />
             </BotCard>
-          ) : message.display?.name === 'showBoardingPass' ? (
+          ) : message.display?.name === "showBoardingPass" ? (
             <BotCard>
               <BoardingPass summary={message.display.props.summary} />
             </BotCard>
-          ) : message.display?.name === 'listDestinations' ? (
+          ) : message.display?.name === "listDestinations" ? (
             <BotCard>
               <Destinations destinations={message.display.props.destinations} />
             </BotCard>
           ) : (
             <BotMessage content={message.content} />
           )
-        ) : message.role === 'user' ? (
+        ) : message.role === "user" ? (
           <UserMessage showAvatar>{message.content}</UserMessage>
         ) : (
           <BotMessage content={message.content} />

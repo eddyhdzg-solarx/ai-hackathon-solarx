@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
@@ -7,8 +7,8 @@ import {
   ArrowUpRight,
   IconCheck,
   SparklesIcon
-} from '@/components/ui/icons'
-import { useActions, useUIState } from 'ai/rsc'
+} from "@/components/ui/icons"
+import { useActions, useUIState } from "ai/rsc"
 
 export interface StatusProps {
   summary: {
@@ -26,23 +26,23 @@ export interface StatusProps {
 }
 
 export const suggestions = [
-  'Change my seat',
-  'Change my flight',
-  'Show boarding pass'
+  "Change my seat",
+  "Change my flight",
+  "Show boarding pass"
 ]
 
 export const FlightStatus = ({
   summary = {
-    departingCity: 'Miami',
-    departingAirport: 'Miami Intl',
-    departingAirportCode: 'MIA',
-    departingTime: '11:45 PM',
-    arrivalCity: 'San Francisco',
-    arrivalAirport: 'San Francisco Intl',
-    arrivalAirportCode: 'SFO',
-    arrivalTime: '4:20 PM',
-    flightCode: 'XY 2421',
-    date: 'Mon, 16 Sep'
+    departingCity: "Miami",
+    departingAirport: "Miami Intl",
+    departingAirportCode: "MIA",
+    departingTime: "11:45 PM",
+    arrivalCity: "San Francisco",
+    arrivalAirport: "San Francisco Intl",
+    arrivalAirportCode: "SFO",
+    arrivalTime: "4:20 PM",
+    flightCode: "XY 2421",
+    date: "Mon, 16 Sep"
   }
 }: StatusProps) => {
   const {
@@ -63,12 +63,12 @@ export const FlightStatus = ({
 
   return (
     <div className="grid gap-4">
-      <div className="grid gap-4 p-4 sm:p-6 border border-neutral-200 rounded-2xl bg-white">
+      <div className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:p-6">
         <div className="flex items-center gap-4">
-          <div className="w-10 sm:w-12 shrink-0 aspect-square rounded-lg bg-neutral-50 overflow-hidden">
+          <div className="aspect-square w-10 shrink-0 overflow-hidden rounded-lg bg-neutral-50 sm:w-12">
             <img
               src="https://www.gstatic.com/flights/airline_logos/70px/UA.png"
-              className="object-cover aspect-square"
+              className="aspect-square object-cover"
               alt="airline logo"
             />
           </div>
@@ -81,10 +81,10 @@ export const FlightStatus = ({
             </div>
           </div>
         </div>
-        <div className="grid items-center gap-8 relative">
-          <div className="w-px h-full absolute top-1 left-[1.1rem] sm:left-[1.45rem] bg-neutral-200" />
-          <div className="flex w-full relative gap-4 pl-2 sm:pl-3.5 items-start">
-            <div className="rounded-full bg-neutral-200 p-1 text-neutral-500 [&>svg]:size-2.5 size-5 flex items-center justify-center shrink-0 translate-y-1">
+        <div className="relative grid items-center gap-8">
+          <div className="absolute left-[1.1rem] top-1 h-full w-px bg-neutral-200 sm:left-[1.45rem]" />
+          <div className="relative flex w-full items-start gap-4 pl-2 sm:pl-3.5">
+            <div className="flex size-5 shrink-0 translate-y-1 items-center justify-center rounded-full bg-neutral-200 p-1 text-neutral-500 [&>svg]:size-2.5">
               <ArrowUpRight />
             </div>
             <div>
@@ -97,21 +97,21 @@ export const FlightStatus = ({
             <div className="ml-auto font-mono">
               <div className="text-lg md:text-xl">{departingTime}</div>
               <div className="text-sm text-neutral-600">in 6h 50m</div>
-              <div className="text-red-600 text-sm font-medium">
+              <div className="text-sm font-medium text-red-600">
                 2h 15m late
               </div>
             </div>
           </div>
-          <div className="flex w-full relative gap-4 pl-2 sm:pl-3.5 min-h-10 items-center">
-            <div className="rounded-full bg-neutral-200 p-1 text-neutral-500 [&>svg]:size-2.5 size-5 flex items-center justify-center shrink-0">
+          <div className="relative flex min-h-10 w-full items-center gap-4 pl-2 sm:pl-3.5">
+            <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-neutral-200 p-1 text-neutral-500 [&>svg]:size-2.5">
               <IconCheck />
             </div>
-            <div className="text-sm sm:text-base text-neutral-600">
+            <div className="text-sm text-neutral-600 sm:text-base">
               Total 11h 30m · 5, 563mi · Overnight
             </div>
           </div>
-          <div className="flex w-full relative gap-4 pl-2 sm:pl-3.5 items-start">
-            <div className="rounded-full bg-neutral-200 p-1 text-neutral-500 [&>svg]:size-2.5 size-5 flex items-center justify-center shrink-0 translate-y-1">
+          <div className="relative flex w-full items-start gap-4 pl-2 sm:pl-3.5">
+            <div className="flex size-5 shrink-0 translate-y-1 items-center justify-center rounded-full bg-neutral-200 p-1 text-neutral-500 [&>svg]:size-2.5">
               <ArrowDownRight />
             </div>
             <div>
@@ -123,18 +123,18 @@ export const FlightStatus = ({
             </div>
             <div className="ml-auto font-mono">
               <div className="text-lg md:text-xl">{arrivalTime}</div>
-              <div className="text-red-600 text-sm font-medium">
+              <div className="text-sm font-medium text-red-600">
                 2h 15m late
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row items-start gap-2">
+      <div className="flex flex-col items-start gap-2 sm:flex-row">
         {suggestions.map(suggestion => (
           <div
             key={suggestion}
-            className="flex items-center gap-2 px-3 py-2 text-sm transition-colors bg-neutral-50 hover:bg-neutral-100 rounded-xl cursor-pointer"
+            className="flex cursor-pointer items-center gap-2 rounded-xl bg-neutral-50 px-3 py-2 text-sm transition-colors hover:bg-neutral-100"
             onClick={async () => {
               const response = await submitUserMessage(suggestion)
               setMessages((currentMessages: any[]) => [

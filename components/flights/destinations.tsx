@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useActions, useUIState } from 'ai/rsc'
+import { useActions, useUIState } from "ai/rsc"
 
 export const Destinations = ({ destinations }: { destinations: string[] }) => {
   const { submitUserMessage } = useActions()
@@ -12,10 +12,10 @@ export const Destinations = ({ destinations }: { destinations: string[] }) => {
         Here is a list of holiday destinations based on the books you have read.
         Choose one to proceed to booking a flight.
       </p>
-      <div className="flex flex-col sm:flex-row items-start gap-2">
+      <div className="flex flex-col items-start gap-2 sm:flex-row">
         {destinations.map(destination => (
           <button
-            className="flex items-center gap-2 px-3 py-2 text-sm transition-colors bg-neutral-50 hover:bg-neutral-100 rounded-xl cursor-pointer"
+            className="flex cursor-pointer items-center gap-2 rounded-xl bg-neutral-50 px-3 py-2 text-sm transition-colors hover:bg-neutral-100"
             key={destination}
             onClick={async () => {
               const response = await submitUserMessage(

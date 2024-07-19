@@ -26,8 +26,8 @@
   - [Radix UI](https://radix-ui.com) for headless component primitives
   - Icons from [Phosphor Icons](https://phosphoricons.com)
 - Chat History, rate limiting, and session storage with [Vercel KV](https://vercel.com/storage/kv)
-- [NextAuth.js](https://github.com/nextauthjs/next-auth) for authentication
 - [Solar API](https://developers.google.com/maps/documentation/solar/overview) for solar and energy analytics
+- [Clerk](https://clerk.com/) for authentication
 
 ## Model Providers
 

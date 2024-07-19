@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
+import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 export function ExternalLink({
   href,
@@ -15,7 +15,7 @@ export function ExternalLink({
       href={href}
       target="_blank"
       className={cn(
-        'inline-flex flex-1 justify-center gap-1 leading-4 hover:underline',
+        "inline-flex flex-1 justify-center gap-1 leading-4 hover:underline",
         className
       )}
     >

@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
-import * as React from 'react'
-import { toast } from 'sonner'
+import { useRouter } from "next/navigation"
+import * as React from "react"
+import { toast } from "sonner"
 
-import { ServerActionResult, type Chat } from '@/lib/types'
+import { ChatShareDialog } from "@/components/chat-share-dialog"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,15 +14,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle
-} from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { IconShare, IconSpinner, IconTrash } from '@/components/ui/icons'
-import { ChatShareDialog } from '@/components/chat-share-dialog'
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { IconShare, IconSpinner, IconTrash } from "@/components/ui/icons"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
-} from '@/components/ui/tooltip'
+} from "@/components/ui/tooltip"
+import { ServerActionResult, type Chat } from "@/lib/types"
 
 interface SidebarActionsProps {
   chat: Chat
@@ -102,15 +102,15 @@ export function SidebarActions({
                     path: chat.path
                   })
 
-                  if (result && 'error' in result) {
+                  if (result && "error" in result) {
                     toast.error(result.error)
                     return
                   }
 
                   setDeleteDialogOpen(false)
                   router.refresh()
-                  router.push('/')
-                  toast.success('Chat deleted')
+                  router.push("/")
+                  toast.success("Chat deleted")
                 })
               }}
             >

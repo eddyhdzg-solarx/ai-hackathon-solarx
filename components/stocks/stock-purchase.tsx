@@ -1,20 +1,20 @@
-'use client'
+"use client"
 
-import { formatNumber } from '@/lib/utils'
-import { useAIState, useActions, useUIState } from 'ai/rsc'
-import { useId, useState } from 'react'
+import { formatNumber } from "@/lib/utils"
+import { useAIState, useActions, useUIState } from "ai/rsc"
+import { useId, useState } from "react"
 
-import type { AI } from '@/lib/chat/actions'
+import type { AI } from "@/lib/chat/actions"
 
 interface Purchase {
   numberOfShares?: number
   symbol: string
   price: number
-  status: 'requires_action' | 'completed' | 'expired'
+  status: "requires_action" | "completed" | "expired"
 }
 
 export function Purchase({
-  props: { numberOfShares, symbol, price, status = 'requires_action' }
+  props: { numberOfShares, symbol, price, status = "requires_action" }
 }: {
   props: Purchase
 }) {
@@ -35,7 +35,7 @@ export function Purchase({
 
     // Insert a hidden history info to the list.
     const message = {
-      role: 'system' as const,
+      role: "system" as const,
       content: `[User has changed to purchase ${newValue} shares of ${name}. Total cost: $${(
         newValue * price
       ).toFixed(2)}]`,
@@ -68,7 +68,7 @@ export function Purchase({
       <div className="text-3xl font-bold">${price}</div>
       {purchasingUI ? (
         <div className="mt-4 text-neutral-200">{purchasingUI}</div>
-      ) : status === 'requires_action' ? (
+      ) : status === "requires_action" ? (
         <>
           <div className="relative mt-6 pb-6">
             <p>Shares to purchase</p>
@@ -100,14 +100,14 @@ export function Purchase({
             <div className="flex flex-wrap items-center text-xl font-bold sm:items-end sm:gap-2 sm:text-3xl">
               <div className="flex basis-1/3 flex-col tabular-nums sm:basis-auto sm:flex-row sm:items-center sm:gap-2">
                 {value}
-                <span className="mb-1 text-sm font-normal text-neutral-600 sm:mb-0 dark:text-neutral-400">
+                <span className="mb-1 text-sm font-normal text-neutral-600 dark:text-neutral-400 sm:mb-0">
                   shares
                 </span>
               </div>
               <div className="basis-1/3 text-center sm:basis-auto">×</div>
               <span className="flex basis-1/3 flex-col tabular-nums sm:basis-auto sm:flex-row sm:items-center sm:gap-2">
                 ${price}
-                <span className="mb-1 ml-1 text-sm font-normal text-neutral-600 sm:mb-0 dark:text-neutral-400">
+                <span className="mb-1 ml-1 text-sm font-normal text-neutral-600 dark:text-neutral-400 sm:mb-0">
                   per share
                 </span>
               </span>
@@ -133,12 +133,12 @@ export function Purchase({
             Purchase
           </button>
         </>
-      ) : status === 'completed' ? (
+      ) : status === "completed" ? (
         <p className="mb-2 text-white">
-          You have successfully purchased {value} ${symbol}. Total cost:{' '}
+          You have successfully purchased {value} ${symbol}. Total cost:{" "}
           {formatNumber(value * price)}
         </p>
-      ) : status === 'expired' ? (
+      ) : status === "expired" ? (
         <p className="mb-2 text-white">Your checkout session has expired!</p>
       ) : null}
     </div>

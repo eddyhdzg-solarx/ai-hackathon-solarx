@@ -1,4 +1,4 @@
-import { ExternalLink } from '@/components/external-link'
+import { ExternalLink } from "@/components/external-link"
 
 export function EmptyScreen() {
   return (
@@ -8,19 +8,19 @@ export function EmptyScreen() {
           SolarX AI Chatbot Demo
         </h1>
         <p className="leading-normal text-neutral-900">
-          This is an open-source AI chatbot demo app template built with{' '}
+          This is an open-source AI chatbot demo app template built with{" "}
           <ExternalLink href="https://nextjs.org" className="underline">
             Next.js
           </ExternalLink>
-          , the{' '}
+          , the{" "}
           <ExternalLink href="https://sdk.vercel.ai" className="underline">
             Vercel AI SDK
           </ExternalLink>
-          ,{' '}
+          ,{" "}
           <ExternalLink href="https://ai.google.dev" className="underline">
             Google Gemini
           </ExternalLink>
-          , and{' '}
+          , and{" "}
           <ExternalLink
             href="https://developers.google.com/maps/documentation/solar/overview"
             className="underline"

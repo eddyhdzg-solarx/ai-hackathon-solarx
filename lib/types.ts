@@ -1,4 +1,5 @@
-import { Message } from 'ai'
+import { auth } from "@clerk/nextjs/server"
+import { Message } from "ai"
 
 export interface Chat extends Record<string, any> {
   id: string
@@ -17,21 +18,4 @@ export type ServerActionResult<Result> = Promise<
     }
 >
 
-export interface Session {
-  user: {
-    id: string
-    email: string
-  }
-}
-
-export interface AuthResult {
-  type: string
-  message: string
-}
-
-export interface User extends Record<string, any> {
-  id: string
-  email: string
-  password: string
-  salt: string
-}
+export type Auth = ReturnType<typeof auth>

@@ -7,7 +7,7 @@ export default function Error({
 }) {
   return (
     <div className="container mx-auto px-4 py-8 text-center">
-      <h1 className="text-lg font-semibold mb-2">
+      <h1 className="mb-2 text-lg font-semibold">
         Oops, something went wrong!
       </h1>
       <p>

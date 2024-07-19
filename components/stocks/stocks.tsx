@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { useActions, useUIState } from 'ai/rsc'
+import { useActions, useUIState } from "ai/rsc"
 
-import type { AI } from '@/lib/chat/actions'
+import type { AI } from "@/lib/chat/actions"
 
 interface Stock {
   symbol: string
@@ -28,10 +28,10 @@ export function Stocks({ props: stocks }: { props: Stock[] }) {
           >
             <div
               className={`text-xl ${
-                stock.delta > 0 ? 'text-green-600' : 'text-red-600'
+                stock.delta > 0 ? "text-green-600" : "text-red-600"
               } flex w-11 flex-row justify-center rounded-lg bg-white/10 p-2`}
             >
-              {stock.delta > 0 ? '↑' : '↓'}
+              {stock.delta > 0 ? "↑" : "↓"}
             </div>
             <div className="flex flex-col">
               <div className="bold uppercase text-neutral-300">
@@ -44,14 +44,14 @@ export function Stocks({ props: stocks }: { props: Stock[] }) {
             <div className="ml-auto flex flex-col">
               <div
                 className={`${
-                  stock.delta > 0 ? 'text-green-600' : 'text-red-600'
+                  stock.delta > 0 ? "text-green-600" : "text-red-600"
                 } bold text-right uppercase`}
               >
                 {` ${((stock.delta / stock.price) * 100).toExponential(1)}%`}
               </div>
               <div
                 className={`${
-                  stock.delta > 0 ? 'text-green-700' : 'text-red-700'
+                  stock.delta > 0 ? "text-green-700" : "text-red-700"
                 } text-right text-base`}
               >
                 {stock.delta.toExponential(1)}

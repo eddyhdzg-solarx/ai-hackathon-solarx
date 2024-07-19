@@ -1,9 +1,9 @@
 const placeholderEvents = [
   {
-    date: '2022-10-01',
-    headline: 'NVIDIA releases new AI-powered graphics card',
+    date: "2022-10-01",
+    headline: "NVIDIA releases new AI-powered graphics card",
     description:
-      'NVIDIA unveils the latest graphics card infused with AI capabilities, revolutionizing gaming and rendering experiences.'
+      "NVIDIA unveils the latest graphics card infused with AI capabilities, revolutionizing gaming and rendering experiences."
   }
 ]
 

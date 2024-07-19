@@ -1,4 +1,4 @@
-import { format, parseISO } from 'date-fns'
+import { format, parseISO } from "date-fns"
 
 interface Event {
   date: string
@@ -15,7 +15,7 @@ export function Events({ props: events }: { props: Event[] }) {
           className="flex shrink-0 flex-col gap-1 rounded-xl bg-neutral-800 p-4"
         >
           <div className="text-sm text-neutral-400">
-            {format(parseISO(event.date), 'dd LLL, yyyy')}
+            {format(parseISO(event.date), "dd LLL, yyyy")}
           </div>
           <div className="text-base font-bold text-neutral-200">
             {event.headline}

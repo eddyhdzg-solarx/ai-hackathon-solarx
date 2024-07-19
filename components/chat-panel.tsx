@@ -1,18 +1,18 @@
-import * as React from 'react'
+import * as React from "react"
 
-import { shareChat } from '@/app/actions'
-import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
-import { ChatShareDialog } from '@/components/chat-share-dialog'
-import { FooterText } from '@/components/footer'
-import { PromptForm } from '@/components/prompt-form'
-import { Button } from '@/components/ui/button'
-import { IconShare } from '@/components/ui/icons'
-import type { AI } from '@/lib/chat/actions'
-import { cn } from '@/lib/utils'
-import { useAIState, useActions, useUIState } from 'ai/rsc'
-import { nanoid } from 'nanoid'
-import { toast } from 'sonner'
-import { UserMessage } from './stocks/message'
+import { shareChat } from "@/app/actions"
+import { ButtonScrollToBottom } from "@/components/button-scroll-to-bottom"
+import { ChatShareDialog } from "@/components/chat-share-dialog"
+import { FooterText } from "@/components/footer"
+import { PromptForm } from "@/components/prompt-form"
+import { Button } from "@/components/ui/button"
+import { IconShare } from "@/components/ui/icons"
+import type { AI } from "@/lib/chat/actions"
+import { cn } from "@/lib/utils"
+import { useAIState, useActions, useUIState } from "ai/rsc"
+import { nanoid } from "nanoid"
+import { toast } from "sonner"
+import { UserMessage } from "./stocks/message"
 
 export interface ChatPanelProps {
   id?: string
@@ -38,16 +38,29 @@ export function ChatPanel({
 
   const exampleMessages = [
     {
-      heading: 'List flights flying from',
-      subheading: 'San Francisco to Rome today',
+      heading: "List flights flying from",
+      subheading: "San Francisco to Rome today",
       message: `List flights flying from San Francisco to Rome today`
     },
     {
-      heading: 'What is the status',
-      subheading: 'of flight BA142?',
-      message: 'What is the status of flight BA142?'
+      heading: "What is the status",
+      subheading: "of flight BA142?",
+      message: "What is the status of flight BA142?"
     }
   ]
+
+  // const exampleMessages = [
+  //   {
+  //     heading: "Get solar data for Antler",
+  //     subheading: "Antler VC office in Austin, TX",
+  //     message: "522 Congress Ave. #400, Austin, TX 78701"
+  //   },
+  //   {
+  //     heading: "Get solar data for Coconut Club",
+  //     subheading: "Coconut Club on West 4th Street",
+  //     message: "310B Colorado St, Austin, TX 78701"
+  //   }
+  // ]
 
   return (
     <div className="fixed inset-x-0 bottom-0 w-full bg-white/90 duration-300 ease-in-out dark:from-10% peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
@@ -63,8 +76,8 @@ export function ChatPanel({
               <div
                 key={example.heading}
                 className={cn(
-                  'cursor-pointer rounded-2xl bg-neutral-50 p-4 text-neutral-950 transition-colors hover:bg-neutral-100 sm:p-6',
-                  index > 1 && 'hidden md:block'
+                  "cursor-pointer rounded-2xl bg-neutral-50 p-4 text-neutral-950 transition-colors hover:bg-neutral-100 sm:p-6",
+                  index > 1 && "hidden md:block"
                 )}
                 onClick={async () => {
                   setMessages(currentMessages => [
@@ -88,7 +101,7 @@ export function ChatPanel({
                     toast(
                       <div className="text-red-600">
                         You have reached your message limit! Please try again
-                        later, or{' '}
+                        later, or{" "}
                         <a
                           className="underline"
                           target="_blank"

@@ -1,17 +1,16 @@
-import { auth } from '@/auth'
-import { Chat } from '@/components/chat'
-import { AI } from '@/lib/chat/actions'
-import { Session } from '@/lib/types'
-import { nanoid } from '@/lib/utils'
-import { getMissingKeys } from '../actions'
+import { Chat } from "@/components/chat"
+import { AI } from "@/lib/chat/actions"
+import { nanoid } from "@/lib/utils"
+import { auth } from "@clerk/nextjs/server"
+import { getMissingKeys } from "../actions"
 
 export const metadata = {
-  title: 'SolarX AI Chatbot Demo'
+  title: "SolarX AI Chatbot Demo"
 }
 
 export default async function IndexPage() {
   const id = nanoid()
-  const session = (await auth()) as Session
+  const session = await auth()
   const missingKeys = await getMissingKeys()
 
   return (

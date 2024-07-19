@@ -1,13 +1,13 @@
-'use client'
+"use client"
 
-import { signup } from '@/app/signup/actions'
-import { getMessageFromCode } from '@/lib/utils'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
-import { toast } from 'sonner'
-import { IconSpinner } from './ui/icons'
+import { signup } from "@/app/signup/actions"
+import { getMessageFromCode } from "@/lib/utils"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { useFormState, useFormStatus } from "react-dom"
+import { toast } from "sonner"
+import { IconSpinner } from "./ui/icons"
 
 export default function SignupForm() {
   const router = useRouter()
@@ -15,7 +15,7 @@ export default function SignupForm() {
 
   useEffect(() => {
     if (result) {
-      if (result.type === 'error') {
+      if (result.type === "error") {
         toast.error(getMessageFromCode(result.resultCode))
       } else {
         toast.success(getMessageFromCode(result.resultCode))
@@ -29,7 +29,7 @@ export default function SignupForm() {
       action={dispatch}
       className="flex flex-col items-center gap-4 space-y-3"
     >
-      <div className="w-full flex-1 rounded-xl border bg-white px-6 pb-4 pt-8 shadow-md md:w-96 dark:bg-neutral-950">
+      <div className="w-full flex-1 rounded-xl border bg-white px-6 pb-4 pt-8 shadow-md dark:bg-neutral-950 md:w-96">
         <h1 className="mb-3 text-2xl font-bold">Sign up for an account!</h1>
         <div className="w-full">
           <div>
@@ -92,7 +92,7 @@ function LoginButton() {
       className="my-4 flex h-10 w-full flex-row items-center justify-center rounded-lg bg-neutral-900 p-2 text-sm font-semibold text-neutral-100 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
       aria-disabled={pending}
     >
-      {pending ? <IconSpinner /> : 'Create account'}
+      {pending ? <IconSpinner /> : "Create account"}
     </button>
   )
 }

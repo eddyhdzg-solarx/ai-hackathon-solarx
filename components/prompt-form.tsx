@@ -1,22 +1,22 @@
-'use client'
+"use client"
 
-import * as React from 'react'
-import Textarea from 'react-textarea-autosize'
+import * as React from "react"
+import Textarea from "react-textarea-autosize"
 
-import { useActions, useUIState } from 'ai/rsc'
+import { useActions, useUIState } from "ai/rsc"
 
-import { Button } from '@/components/ui/button'
-import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
+import { Button } from "@/components/ui/button"
+import { IconArrowElbow, IconPlus } from "@/components/ui/icons"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
-} from '@/components/ui/tooltip'
-import { type AI } from '@/lib/chat/actions'
-import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
-import { nanoid } from 'nanoid'
-import { toast } from 'sonner'
-import { UserMessage } from './stocks/message'
+} from "@/components/ui/tooltip"
+import { type AI } from "@/lib/chat/actions"
+import { useEnterSubmit } from "@/lib/hooks/use-enter-submit"
+import { nanoid } from "nanoid"
+import { toast } from "sonner"
+import { UserMessage } from "./stocks/message"
 
 export function PromptForm({
   input,
@@ -46,11 +46,11 @@ export function PromptForm({
 
         // Blur focus on mobile
         if (window.innerWidth < 600) {
-          e.target['message']?.blur()
+          e.target["message"]?.blur()
         }
 
         const value = input.trim()
-        setInput('')
+        setInput("")
         if (!value) return
 
         // Optimistically add user message UI
@@ -69,7 +69,7 @@ export function PromptForm({
         } catch {
           toast(
             <div className="text-red-600">
-              You have reached your message limit! Please try again later, or{' '}
+              You have reached your message limit! Please try again later, or{" "}
               <a
                 className="underline"
                 target="_blank"
@@ -91,14 +91,14 @@ export function PromptForm({
         ref={fileRef}
         onChange={async event => {
           if (!event.target.files) {
-            toast.error('No file selected')
+            toast.error("No file selected")
             return
           }
 
           const file = event.target.files[0]
 
-          if (file.type.startsWith('video/')) {
-            const responseMessage = await describeImage('')
+          if (file.type.startsWith("video/")) {
+            const responseMessage = await describeImage("")
             setMessages(currentMessages => [
               ...currentMessages,
               responseMessage
@@ -140,7 +140,7 @@ export function PromptForm({
           tabIndex={0}
           onKeyDown={onKeyDown}
           placeholder="Send a message."
-          className="min-h-[60px] w-full bg-transparent placeholder:text-neutral-900 resize-none px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
+          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] placeholder:text-neutral-900 focus-within:outline-none sm:text-sm"
           autoFocus
           spellCheck={false}
           autoComplete="off"
@@ -156,8 +156,8 @@ export function PromptForm({
               <Button
                 type="submit"
                 size="icon"
-                disabled={input === ''}
-                className="bg-transparent shadow-none text-neutral-950 rounded-full hover:bg-neutral-200"
+                disabled={input === ""}
+                className="rounded-full bg-transparent text-neutral-950 shadow-none hover:bg-neutral-200"
               >
                 <IconArrowElbow />
                 <span className="sr-only">Send message</span>
