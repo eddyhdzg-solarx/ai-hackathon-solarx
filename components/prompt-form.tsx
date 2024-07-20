@@ -125,6 +125,7 @@ export function PromptForm({
           variant="outline"
           size="icon"
           className="absolute left-4 top-[14px] size-8 rounded-full bg-background p-0 sm:left-4"
+          disabled
           onClick={() => {
             fileRef.current?.click()
           }}

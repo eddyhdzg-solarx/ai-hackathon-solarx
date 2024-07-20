@@ -71,6 +71,10 @@
 
 .solar-panels {
   position: relative;
+  border-radius: 8px;
+}
+.solar-panels * {
+  border-radius: 8px;
 }
 
 .solar-panels-map {

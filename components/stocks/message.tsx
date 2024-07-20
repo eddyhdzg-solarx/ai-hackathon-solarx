@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client"
 
 /* eslint-disable @next/next/no-img-element */

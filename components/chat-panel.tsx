@@ -13,6 +13,7 @@ import { nanoid } from "nanoid"
 import { toast } from "sonner"
 import { UserMessage } from "./stocks/message"
 import { shareChat } from "@/app/actions"
+import { antler, bucees } from "@/app/consts"
 
 export interface ChatPanelProps {
   id?: string
@@ -36,33 +37,7 @@ export function ChatPanel({
   const { submitUserMessage } = useActions()
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
 
-  const exampleMessages = [
-    {
-      heading: "List flights flying from",
-      subheading: "San Francisco to Rome today",
-      message: `List flights flying from San Francisco to Rome today`
-    },
-    {
-      heading: "What is the status",
-      subheading: "of flight BA142?",
-      message: "What is the status of flight BA142?"
-    }
-  ]
-
-  // const exampleMessages = [
-  //   {
-  //     heading: "Get solar data for Antler",
-  //     subheading: "Antler VC office in Austin, TX",
-  //     message: "522 Congress Ave. #400, Austin, TX 78701"
-  // [30.267946904577837, -97.74325599361393]
-  //   },
-  //   {
-  //     heading: "Get solar data for Coconut Club",
-  //     subheading: "Coconut Club on West 4th Street",
-  //     message: "310B Colorado St, Austin, TX 78701"
-  // [30.266298424917114, -97.74513918830337]
-  //   }
-  // ]
+  const exampleMessages = [antler, bucees]
 
   return (
     <div className="fixed inset-x-0 bottom-0 w-full bg-white/90 duration-300 ease-in-out dark:from-10% peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
@@ -76,7 +51,7 @@ export function ChatPanel({
           {messages.length === 0 &&
             exampleMessages.map((example, index) => (
               <div
-                key={example.heading}
+                key={example.title}
                 className={cn(
                   "cursor-pointer rounded-2xl bg-neutral-50 p-4 text-neutral-950 transition-colors hover:bg-neutral-100 sm:p-6",
                   index > 1 && "hidden md:block"
@@ -86,13 +61,13 @@ export function ChatPanel({
                     ...currentMessages,
                     {
                       id: nanoid(),
-                      display: <UserMessage>{example.message}</UserMessage>
+                      display: <UserMessage>{example.description}</UserMessage>
                     }
                   ])
 
                   try {
                     const responseMessage = await submitUserMessage(
-                      example.message
+                      example.description
                     )
 
                     setMessages(currentMessages => [
@@ -118,9 +93,9 @@ export function ChatPanel({
                   }
                 }}
               >
-                <div className="font-medium">{example.heading}</div>
+                <div className="font-medium">{example.title}</div>
                 <div className="text-sm text-neutral-800">
-                  {example.subheading}
+                  {example.description}
                 </div>
               </div>
             ))}

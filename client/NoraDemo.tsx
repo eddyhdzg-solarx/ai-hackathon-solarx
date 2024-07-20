@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react"
 
 import SolarPanelsMap from "@/nora"
-import { useMap, useMapsLibrary } from "@vis.gl/react-google-maps"
+import { useMapsLibrary } from "@vis.gl/react-google-maps"
 
 export const NoraDemo = () => {
   const mapContainerRef = useRef(null)
@@ -18,13 +18,6 @@ export const NoraDemo = () => {
   }, [mapContainerRef, Map])
 
   return (
-    <div
-      ref={mapContainerRef}
-      className="solar-panels bg-red-500"
-      style={{
-        width: 400,
-        height: 400
-      }}
-    />
+    <div ref={mapContainerRef} id="solar-panels" className="solar-panels" />
   )
 }

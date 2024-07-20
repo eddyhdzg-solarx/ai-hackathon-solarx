@@ -6,7 +6,7 @@ export const metadata = {
 
 export default async function Page() {
   return (
-    <div className="flex">
+    <div className="flex w-full items-center justify-center p-10">
       <NoraDemo />
     </div>
   )

@@ -6,6 +6,7 @@ import {
 } from "@nora-soderlund/google-maps-solar-api"
 import getDataLayersCanvas from "./controllers/getDataLayersCanvas"
 import DataLayerOverlay from "./interfaces/DataLayerOverlay"
+import { bucees } from "@/app/consts"
 
 export default class SolarPanelsMap {
   private map!: google.maps.Map
@@ -42,10 +43,7 @@ export default class SolarPanelsMap {
     )) as google.maps.GeometryLibrary
 
     this.map = new this.Map(this.mapElement, {
-      center: {
-        lat: 57.623147493770105,
-        lng: 11.931981013011718
-      },
+      center: bucees,
       mapTypeId: "satellite",
       tilt: 0,
       styles: [
@@ -55,10 +53,11 @@ export default class SolarPanelsMap {
           stylers: [{ visibility: "off" }]
         }
       ],
-      zoom: 17,
+      zoom: 20,
       streetViewControl: false,
       mapTypeControl: false,
-      rotateControl: false
+      rotateControl: false,
+      disableDefaultUI: true
     })
   }
 
@@ -73,7 +72,8 @@ export default class SolarPanelsMap {
 
     const inputElement = document.createElement("input")
     inputElement.type = "text"
-    inputElement.className = "solar-panels-form-input"
+    inputElement.className = "solar-panels-form-input rounded-md"
+    inputElement.style.borderRadius = "12px"
     this.formElement.append(inputElement)
 
     const autocomplete = new Autocomplete(inputElement, {
