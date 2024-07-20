@@ -1,5 +1,4 @@
 <a href="https://ai.solarx.app/">
-  <img alt="SolarX AI Chatbot Demo" src="https://gemini-chatbot.vercel.rocks/og.png FIXME">
   <h1 align="center">☀️ SolarX AI Chatbot Demo</h1>
 </a>
 
