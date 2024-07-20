@@ -1,78 +1,54 @@
 "use client"
 
+import { ChatList } from "./ChatList"
+import { ChatPanel } from "./ChatPanel"
 import { EmptyScreen } from "@/components/empty-screen"
+import { useLocalStorage } from "@/lib/hooks/use-local-storage"
 import { useScrollAnchor } from "@/lib/hooks/use-scroll-anchor"
 import { cn } from "@/lib/utils"
-import { ChatPanel } from "./ChatPanel"
-import { useState } from "react"
+import { User } from "@clerk/nextjs/dist/types/server"
+import { usePathname, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { toast } from "sonner"
 import { NoraDemo } from "./NoraDemo"
-import { ControlPosition } from "@vis.gl/react-google-maps"
-import { Map } from "@vis.gl/react-google-maps"
-import { GoogleDemo } from "../google/GoogleDemo"
-import { CustomMapControl } from "../google/MapControl"
-import MapHandler from "../google/MapHandler"
 
-export type ChatProps = React.ComponentProps<"div">
-
-export type AutocompleteMode = { id: string; label: string }
-
-const autocompleteModes: Array<AutocompleteMode> = [
-  { id: "classic", label: "Google Autocomplete Widget" },
-  { id: "custom", label: "Custom Build" },
-  { id: "custom-hybrid", label: "Custom w/ Select Widget" }
-]
-
-export function Chat({ className }: ChatProps) {
-  const [showMap, setShowMap] = useState(false)
+export function Chat() {
+  const router = useRouter()
+  const path = usePathname()
   const [input, setInput] = useState("")
+
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor()
 
   return (
     <div
-      className="group w-full overflow-auto pl-0 peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px]"
-      style={{
-        height: "100%",
-        width: "100%"
-      }}
+      className="group z-10 w-full overflow-auto pl-0 peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px]"
+      ref={scrollRef}
     >
-      <div
-        style={{
-          height: "inherit",
-          width: "inherit"
-        }}
-        ref={scrollRef}
-      >
+      <div className={cn("pb-4")} ref={messagesRef}>
         <div
-          className={cn("h-full py-4", className)}
-          ref={messagesRef}
           style={{
-            height: "inherit",
-            width: "inherit"
+            paddingBottom: 16
           }}
         >
-          <div
-            className="mx-auto flex h-full flex-1 items-center justify-center"
-            style={{
-              height: "inherit",
-              width: "inherit",
-
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <NoraDemo />
-          </div>
+          <EmptyScreen />
         </div>
-
-        <ChatPanel
-          input={input}
-          setInput={setInput}
-          isAtBottom={isAtBottom}
-          scrollToBottom={scrollToBottom}
-        />
+        <div
+          className="h-full max-h-[768px] w-full"
+          style={{
+            height: 768
+          }}
+        >
+          <NoraDemo />
+        </div>
+        <div className="h-px w-full" ref={visibilityRef} />
       </div>
+      <ChatPanel
+        input={input}
+        setInput={setInput}
+        isAtBottom={isAtBottom}
+        scrollToBottom={scrollToBottom}
+      />
     </div>
   )
 }

@@ -24,7 +24,7 @@ export const NoraDemo = () => {
       className="solar-panels"
       style={{
         maxWidth: 768,
-        maxHeight: 400
+        maxHeight: 768
       }}
     />
   )
