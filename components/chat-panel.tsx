@@ -54,11 +54,13 @@ export function ChatPanel({
   //     heading: "Get solar data for Antler",
   //     subheading: "Antler VC office in Austin, TX",
   //     message: "522 Congress Ave. #400, Austin, TX 78701"
+  // [30.267946904577837, -97.74325599361393]
   //   },
   //   {
   //     heading: "Get solar data for Coconut Club",
   //     subheading: "Coconut Club on West 4th Street",
   //     message: "310B Colorado St, Austin, TX 78701"
+  // [30.266298424917114, -97.74513918830337]
   //   }
   // ]
 

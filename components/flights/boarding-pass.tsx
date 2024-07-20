@@ -1,6 +1,6 @@
 "use client"
 
-import Barcode from "react-jsbarcode"
+import { ReactBarcode } from "react-jsbarcode"
 
 interface BoardingPassProps {
   summary: {
@@ -77,7 +77,7 @@ export const BoardingPass = ({
         </div>
       </div>
       <div className="hidden sm:flex">
-        <Barcode
+        <ReactBarcode
           value="12345RAUCHG"
           options={{ format: "code128", height: 20, displayValue: false }}
         />
