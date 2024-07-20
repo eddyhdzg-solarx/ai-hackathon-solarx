@@ -1,1 +1,2 @@
-export * from "./MapDemo"
+export * from "./MapProvider"
+export * from "./NoraDemo"

@@ -1,4 +1,4 @@
-import "@/app/globals.css"
+import "./globals.css"
 import { Header } from "@/components/header"
 import { Providers } from "@/components/providers"
 import { Toaster } from "@/components/ui/sonner"
