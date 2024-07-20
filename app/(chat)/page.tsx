@@ -8,14 +8,16 @@ export const metadata = {
   title: "SolarX AI Chatbot Demo"
 }
 
-export default async function IndexPage() {
+export default async function Page() {
   const id = nanoid()
   const user = await currentUser()
   const missingKeys = await getMissingKeys()
 
+  const userId = user?.id
+
   return (
     <AI initialAIState={{ chatId: id, interactions: [], messages: [] }}>
-      <Chat id={id} user={user} missingKeys={missingKeys} />
+      <Chat id={id} userId={userId} missingKeys={missingKeys} />
     </AI>
   )
 }

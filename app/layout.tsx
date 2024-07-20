@@ -36,15 +36,15 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            "font-sans antialiased",
-            GeistSans.variable,
-            GeistMono.variable
-          )}
-        >
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          "font-sans antialiased",
+          GeistSans.variable,
+          GeistMono.variable
+        )}
+      >
+        <ClerkProvider>
           <Toaster position="top-center" />
           <Providers
             attribute="class"
@@ -58,8 +58,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </Providers>
           <Analytics />
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   )
 }

@@ -5,14 +5,14 @@ import Link from "next/link"
 
 export interface ChatList {
   messages: UIState
-  user?: User | null
+  userId?: User["id"] | null
   isShared: boolean
 }
 
-export function ChatList({ messages, user, isShared }: ChatList) {
+export function ChatList({ messages, userId, isShared }: ChatList) {
   return messages.length ? (
     <div className="relative mx-auto grid max-w-2xl auto-rows-max gap-8 px-4">
-      {!isShared && !user ? (
+      {!isShared && !userId ? (
         <>
           <div className="group relative flex items-start md:-ml-12">
             <div className="flex size-[25px] shrink-0 select-none items-center justify-center rounded-lg border bg-background shadow-sm">

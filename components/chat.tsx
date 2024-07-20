@@ -17,10 +17,10 @@ export interface ChatProps extends React.ComponentProps<"div"> {
   id?: string
   initialMessages?: Message[]
   missingKeys: string[]
-  user?: User | null
+  userId?: User["id"] | null
 }
 
-export function Chat({ id, className, missingKeys, user }: ChatProps) {
+export function Chat({ id, className, missingKeys, userId }: ChatProps) {
   const router = useRouter()
   const path = usePathname()
   const [input, setInput] = useState("")
@@ -30,12 +30,12 @@ export function Chat({ id, className, missingKeys, user }: ChatProps) {
   const [_, setNewChatId] = useLocalStorage("newChatId", id)
 
   useEffect(() => {
-    if (user) {
+    if (userId) {
       if (!path.includes("chat") && messages.length === 1) {
         window.history.replaceState({}, "", `/chat/${id}`)
       }
     }
-  }, [id, path, user?.id, messages])
+  }, [id, path, userId, messages])
 
   useEffect(() => {
     const messagesLength = aiState.messages?.length
@@ -64,7 +64,7 @@ export function Chat({ id, className, missingKeys, user }: ChatProps) {
     >
       <div className={cn("pb-[200px] pt-4", className)} ref={messagesRef}>
         {messages.length ? (
-          <ChatList messages={messages} isShared={false} user={user} />
+          <ChatList messages={messages} isShared={false} userId={userId} />
         ) : (
           <EmptyScreen />
         )}

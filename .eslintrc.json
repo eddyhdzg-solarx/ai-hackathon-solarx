@@ -12,7 +12,6 @@
   "rules": {
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "off",
-    "no-unused-vars": "error", // or "warn" / "error"
   },
   "settings": {
     "tailwindcss": {
