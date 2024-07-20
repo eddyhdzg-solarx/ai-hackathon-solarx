@@ -1,7 +1,7 @@
 "use client"
 
 import "@/app/globals.css"
-import { MapProvider } from "@/client/MapProvider"
+import { MapProvider } from "@/client/solar/MapProvider"
 
 interface DemoLayoutProps {
   children: React.ReactNode

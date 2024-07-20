@@ -11,9 +11,8 @@ import { cn } from "@/lib/utils"
 import { useAIState, useActions, useUIState } from "ai/rsc"
 import { nanoid } from "nanoid"
 import { toast } from "sonner"
-import { UserMessage } from "./stocks/message"
 import { shareChat } from "@/app/actions"
-import { antler, bucees } from "@/app/consts"
+import { antler, bucees } from "@/consts"
 
 export interface ChatPanelProps {
   id?: string
@@ -36,7 +35,6 @@ export function ChatPanel({
   const [messages, setMessages] = useUIState<typeof AI>()
   const { submitUserMessage } = useActions()
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
-
   const exampleMessages = [antler, bucees]
 
   return (
@@ -61,7 +59,7 @@ export function ChatPanel({
                     ...currentMessages,
                     {
                       id: nanoid(),
-                      display: <UserMessage>{example.description}</UserMessage>
+                      display: <div>{example.description}</div>
                     }
                   ])
 

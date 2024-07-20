@@ -12,18 +12,8 @@ import {
   getMutableAIState
 } from "ai/rsc"
 
-import { BotCard, BotMessage } from "@/components/stocks"
-
 import { saveChat } from "@/app/actions"
-import { BoardingPass } from "@/components/flights/boarding-pass"
-import { Destinations } from "@/components/flights/destinations"
-import { FlightStatus } from "@/components/flights/flight-status"
-import { ListFlights } from "@/components/flights/list-flights"
-import { PurchaseTickets } from "@/components/flights/purchase-ticket"
-import { SelectSeats } from "@/components/flights/select-seats"
-import { ListHotels } from "@/components/hotels/list-hotels"
-import { Video } from "@/components/media/video"
-import { SpinnerMessage, UserMessage } from "@/components/stocks/message"
+
 import { CheckIcon, SpinnerIcon } from "@/components/ui/icons"
 import { nanoid, sleep } from "@/lib/utils"
 import { google } from "@ai-sdk/google"

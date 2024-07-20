@@ -1,4 +1,3 @@
-import type { auth } from "@clerk/nextjs/server"
 import { Message } from "ai"
 
 export interface Chat extends Record<string, any> {
@@ -17,5 +16,3 @@ export type ServerActionResult<Result> = Promise<
       error: string
     }
 >
-
-export type Auth = ReturnType<typeof auth>

@@ -1,4 +1,4 @@
-import { NoraDemo } from "@/client/NoraDemo"
+import { NoraDemo } from "@/client/solar/NoraDemo"
 
 export const metadata = {
   title: "SolarX AI Chatbot Demo"

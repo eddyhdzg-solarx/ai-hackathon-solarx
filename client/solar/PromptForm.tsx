@@ -3,8 +3,6 @@
 import * as React from "react"
 import Textarea from "react-textarea-autosize"
 
-import { useActions, useUIState } from "ai/rsc"
-
 import { Button } from "@/components/ui/button"
 import { IconArrowElbow, IconPlus } from "@/components/ui/icons"
 import {
@@ -12,7 +10,6 @@ import {
   TooltipContent,
   TooltipTrigger
 } from "@/components/ui/tooltip"
-import { type AI } from "@/lib/chat/actions"
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit"
 import { nanoid } from "nanoid"
 import { toast } from "sonner"
@@ -26,8 +23,6 @@ export function PromptForm({
 }) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
-  const { submitUserMessage, describeImage } = useActions()
-  const [_, setMessages] = useUIState<typeof AI>()
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -51,36 +46,6 @@ export function PromptForm({
         const value = input.trim()
         setInput("")
         if (!value) return
-
-        // Optimistically add user message UI
-        setMessages(currentMessages => [
-          ...currentMessages,
-          {
-            id: nanoid(),
-            display: <div>{value}</div>
-          }
-        ])
-
-        try {
-          // Submit and get response message
-          const responseMessage = await submitUserMessage(value)
-          setMessages(currentMessages => [...currentMessages, responseMessage])
-        } catch {
-          toast(
-            <div className="text-red-600">
-              You have reached your message limit! Please try again later, or{" "}
-              <a
-                className="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://vercel.com/templates/next.js/gemini-ai-chatbot"
-              >
-                deploy your own version
-              </a>
-              .
-            </div>
-          )
-        }
       }}
     >
       <input
@@ -93,33 +58,9 @@ export function PromptForm({
             toast.error("No file selected")
             return
           }
-
-          const file = event.target.files[0]
-
-          if (file.type.startsWith("video/")) {
-            const responseMessage = await describeImage("")
-            setMessages(currentMessages => [
-              ...currentMessages,
-              responseMessage
-            ])
-          } else {
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-
-            reader.onloadend = async () => {
-              const base64String = reader.result
-              const responseMessage = await describeImage(base64String)
-              setMessages(currentMessages => [
-                ...currentMessages,
-                responseMessage
-              ])
-            }
-          }
         }}
       />
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-neutral-100 px-12 sm:rounded-full sm:px-12">
-        {/* <Tooltip>
-          <TooltipTrigger asChild> */}
         <Button
           variant="outline"
           size="icon"
@@ -132,9 +73,6 @@ export function PromptForm({
           <IconPlus />
           <span className="sr-only">New Chat</span>
         </Button>
-        {/* </TooltipTrigger>
-          <TooltipContent>Add Attachments</TooltipContent>
-        </Tooltip> */}
         <Textarea
           ref={inputRef}
           tabIndex={0}

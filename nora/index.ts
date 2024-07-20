@@ -6,7 +6,7 @@ import {
 } from "@nora-soderlund/google-maps-solar-api"
 import getDataLayersCanvas from "./controllers/getDataLayersCanvas"
 import DataLayerOverlay from "./interfaces/DataLayerOverlay"
-import { bucees } from "@/app/consts"
+import { bucees } from "@/consts"
 
 export default class SolarPanelsMap {
   private map!: google.maps.Map
