@@ -18,6 +18,14 @@ export const NoraDemo = () => {
   }, [mapContainerRef, Map])
 
   return (
-    <div ref={mapContainerRef} id="solar-panels" className="solar-panels" />
+    <div
+      ref={mapContainerRef}
+      id="solar-panels"
+      className="solar-panels"
+      style={{
+        maxWidth: 768,
+        maxHeight: 400
+      }}
+    />
   )
 }

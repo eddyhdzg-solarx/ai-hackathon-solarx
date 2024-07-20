@@ -1,3 +1,5 @@
+import "@/app/globals.css"
+
 import { SidebarDesktop } from "@/components/sidebar-desktop"
 
 interface ChatLayoutProps {

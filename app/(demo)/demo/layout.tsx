@@ -9,10 +9,8 @@ interface DemoLayoutProps {
 
 export default function DemoLayout({ children }: DemoLayoutProps) {
   return (
-    <MapProvider>
-      <div className="relative flex h-[calc(100vh_-_theme(spacing.16))] overflow-hidden">
-        {children}
-      </div>
-    </MapProvider>
+    <div className="relative flex h-[calc(100vh_-_theme(spacing.16))] overflow-hidden">
+      {children}
+    </div>
   )
 }

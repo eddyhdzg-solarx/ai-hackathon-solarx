@@ -46,9 +46,16 @@ export function ChatPanel({
                 )}
                 onClick={() => {}}
               >
-                <div className="font-medium">{example.title}</div>
-                <div className="text-sm text-neutral-800">
-                  {example.description}
+                <div className="space-y-4">
+                  <div>
+                    <div className="font-medium">{example.title}</div>
+                    <div className="text-sm text-neutral-800">
+                      {example.description}
+                    </div>
+                  </div>
+                  <div className="text-sm font-medium italic text-neutral-800">
+                    {example.address}
+                  </div>
                 </div>
               </div>
             ))}

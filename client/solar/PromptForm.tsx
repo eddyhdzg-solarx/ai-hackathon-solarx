@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useEffect, useRef, useState } from "react"
 import Textarea from "react-textarea-autosize"
 
 import { Button } from "@/components/ui/button"
@@ -11,8 +11,16 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip"
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit"
-import { nanoid } from "nanoid"
 import { toast } from "sonner"
+import { useMapsLibrary } from "@vis.gl/react-google-maps"
+
+export type AutocompleteMode = { id: string; label: string }
+
+const autocompleteModes: Array<AutocompleteMode> = [
+  { id: "classic", label: "Google Autocomplete Widget" },
+  { id: "custom", label: "Custom Build" },
+  { id: "custom-hybrid", label: "Custom w/ Select Widget" }
+]
 
 export function PromptForm({
   input,
@@ -22,15 +30,27 @@ export function PromptForm({
   setInput: (value: string) => void
 }) {
   const { formRef, onKeyDown } = useEnterSubmit()
-  const inputRef = React.useRef<HTMLTextAreaElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  React.useEffect(() => {
+  const Autocomplete = useMapsLibrary("places")?.Autocomplete
+
+  const [selectedAutocompleteMode, setSelectedAutocompleteMode] =
+    useState<AutocompleteMode>(autocompleteModes[0])
+
+  const [selectedPlace, setSelectedPlace] =
+    useState<google.maps.places.PlaceResult | null>(null)
+
+  useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus()
     }
   }, [])
 
-  const fileRef = React.useRef<HTMLInputElement>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  if (!Autocomplete) {
+    return null
+  }
 
   return (
     <form
@@ -60,6 +80,7 @@ export function PromptForm({
           }
         }}
       />
+
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-neutral-100 px-12 sm:rounded-full sm:px-12">
         <Button
           variant="outline"
@@ -86,6 +107,7 @@ export function PromptForm({
           name="message"
           rows={1}
           value={input}
+          disabled
           onChange={e => setInput(e.target.value)}
         />
         <div className="absolute right-4 top-[13px] sm:right-4">

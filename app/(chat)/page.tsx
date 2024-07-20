@@ -1,6 +1,5 @@
-import { nanoid } from "@/lib/utils"
-import { currentUser } from "@clerk/nextjs/server"
-import { getMissingKeys } from "../actions"
+import "@/app/globals.css"
+
 import { Chat } from "@/client"
 
 export const metadata = {
